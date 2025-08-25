@@ -1,0 +1,197 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 60px 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .hero h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+  }
+  
+  .btn-custom {
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  
+  .features {
+    margin-top: 50px;
+  }
+  
+  .feature-card {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+    padding: 25px;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .feature-card i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  /* Background tổng thể */
+  /* Card glass effect */
+  .card {
+    border: none;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Header bảng */
+  .table thead {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+  }
+  
+  /* Nút custom */
+  .btn-custom {
+    border-radius: 30px;
+    padding: 10px 20px;
+  }
+  
+  /* Stats card */
+  .stats-card {
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+  }
+  
+  /* Breadcrumb */
+  .breadcrumb {
+    background: transparent;
+  }
+  .breadcrumb a {
+    color: #ffc107;
+    text-decoration: none;
+  }
+  .breadcrumb .active {
+    color: #fff;
+  }
+  
+
+
+  
+  /* Card kiểu glassmorphism */
+  .glass-card {
+    border: none;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    overflow: hidden;
+    color: #fff;
+  }
+  
+  /* Header gradient xanh tím */
+  .glass-card .card-header {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border: none;
+    color: #fff;
+  }
+  
+  /* Input rõ ràng, dễ nhìn */
+.form-control, .form-select, textarea {
+    border-radius: 12px;
+    background: #ffffff;
+    color: #333;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus, .form-select:focus, textarea:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 0 0.2rem rgba(106, 17, 203, 0.25);
+    background: #fff;
+    color: #000;
+  }
+  
+  /* Label */
+  .form-label {
+    font-weight: 500;
+    color: #fff; /* để nổi bật trên nền gradient */
+  }
+  
+  /* Radio button chỉnh màu */
+  .form-check-input:checked {
+    background-color: #6a11cb;
+    border-color: #6a11cb;
+  }
+  
+  /* Placeholder trắng nhẹ */
+  ::placeholder {
+    color: rgba(255,255,255,0.7) !important;
+  }
+  
+  /* Nút */
+  .btn {
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-weight: 500;
+  }
+  .btn-warning {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border: none;
+    color: #fff;
+  }
+  .btn-warning:hover {
+    opacity: 0.9;
+  }
+  
+  /* Breadcrumb */
+  .breadcrumb {
+    background: transparent;
+  }
+  .breadcrumb a {
+    color: #a5d8ff;
+    text-decoration: none;
+  }
+  .breadcrumb .active {
+    color: #fff;
+  }
+  
+
+
+    /* Tạo user */
+

@@ -1,0 +1,100 @@
+/* Background cho cả page */
+.bg-gradient {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    min-height: 100vh;
+    padding: 30px 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Card kiểu Glassmorphism */
+  .glass-card {
+    background: linear-gradient(90deg, #2380cb, #2575fc);/* trắng trong suốt nhẹ */
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333; /* text đen dễ đọc */
+  }
+  
+  /* Header Gradient */
+  .bg-gradient-primary {
+    background: linear-gradient(90deg, #2575fc, #6a11cb);
+    border-radius: 16px 16px 0 0;
+    color: #fff;
+  }
+  
+  /* Form Controls */
+  .form-control, .form-select, textarea {
+    border-radius: 12px;
+    background: #fdfdfd;
+    color: #333;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
+    padding: 10px 14px;
+    font-size: 15px;
+  }
+  
+  .form-control:focus, .form-select:focus, textarea:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 0 0.25rem rgba(106, 17, 203, 0.2);
+    background: #fff;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #2575fc, #6a11cb);
+  }
+  
+  .btn-secondary {
+    border-radius: 12px;
+    background: #6c757d;
+    border: none;
+  }
+  
+  .btn-secondary:hover {
+    background: #5a6268;
+  }
+  
+  /* Breadcrumb */
+  .breadcrumb {
+    background: transparent;
+  }
+  
+  .breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .breadcrumb-item.active {
+    color: #f1f1f1;
+  }
+  
+  .breadcrumb.glass-card {
+  background: rgba(255, 255, 255, 0.2); /* nền trong mờ rõ hơn */
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.breadcrumb.glass-card .breadcrumb-item a {
+  color: #fff; /* chữ trắng */
+  text-decoration: none;
+}
+
+.breadcrumb.glass-card .breadcrumb-item.active {
+  color: #ffd700; /* vàng cho mục đang active */
+}
+
+.breadcrumb.glass-card {
+  background: linear-gradient(90deg, #2575fc, #6a11cb);
+  border-radius: 10px;
+  padding: 8px 15px;
+}

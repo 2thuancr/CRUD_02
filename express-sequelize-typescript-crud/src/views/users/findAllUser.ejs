@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container-fluid py-4">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Trang chủ</a></li>
+        <li class="breadcrumb-item active">Người dùng</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold">
+        <i class="fas fa-users text-warning"></i> <%= title %> 
+        <span class="badge bg-light text-dark"><%= pagination.total %></span>
+      </h2>
+      <a href="/crud" class="btn btn-warning btn-custom">
+        <i class="fas fa-user-plus"></i> Thêm người dùng
+      </a>
+    </div>
+
+    <!-- Alerts -->
+    <% if (typeof success !== 'undefined' && success) { %>
+      <div class="alert alert-success alert-dismissible fade show shadow" role="alert">
+        <i class="fas fa-check-circle"></i> <%= success %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% } %>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+        <i class="fas fa-exclamation-circle"></i> <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% } %>
+
+    <!-- Search -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <form method="GET" action="/users" class="row g-3 align-items-end">
+          <div class="col-md-6">
+            <label for="search" class="form-label">Tìm kiếm</label>
+            <input type="text" class="form-control" id="search" name="search"
+                   placeholder="Tên, email hoặc địa chỉ..."
+                   value="<%= search || '' %>">
+          </div>
+          <div class="col-md-3">
+            <label for="limit" class="form-label">Số dòng / trang</label>
+            <select name="limit" id="limit" class="form-select">
+              <option value="5" <%= pagination.limit == 5 ? 'selected' : '' %>>5</option>
+              <option value="10" <%= pagination.limit == 10 ? 'selected' : '' %>>10</option>
+              <option value="25" <%= pagination.limit == 25 ? 'selected' : '' %>>25</option>
+              <option value="50" <%= pagination.limit == 50 ? 'selected' : '' %>>50</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-light w-100 btn-custom">
+              <i class="fas fa-search"></i> Tìm kiếm
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <% if (users.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle text-white">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên</th>
+                  <th>Email</th>
+                  <th>Địa chỉ</th>
+                  <th>Giới tính</th>
+                  <th>Ngày tạo</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% users.forEach((user) => { %>
+                  <tr>
+                    <td><span class="badge bg-light text-dark">#<%= user.id %></span></td>
+                    <td><strong><%= user.firstName %> <%= user.lastName %></strong></td>
+                    <td><i class="fas fa-envelope text-warning"></i> <%= user.email %></td>
+                    <td><%= user.address || '<em>Chưa có</em>' %></td>
+                    <td>
+                      <% if (user.gender) { %>
+                        <i class="fas fa-mars text-info"></i> Nam
+                      <% } else { %>
+                        <i class="fas fa-venus text-danger"></i> Nữ
+                      <% } %>
+                    </td>
+                    <td><%= new Date(user.createdAt).toLocaleDateString("vi-VN") %></td>
+                    <td>
+                      <div class="btn-group">
+                        <a href="/edit-user/<%= user.id %>" class="btn btn-outline-light btn-sm" title="Sửa">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="/delete-user/<%= user.id %>" class="btn btn-outline-danger btn-sm" title="Xóa"
+                           onclick="return confirm('Bạn có chắc muốn xóa người dùng này không?')">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <% if (pagination.totalPages > 1) { %>
+            <nav aria-label="User pagination" class="mt-4">
+              <ul class="pagination justify-content-center">
+                <li class="page-item <%= pagination.page === 1 ? 'disabled' : '' %>">
+                  <a class="page-link" href="?page=<%= pagination.page - 1 %>&limit=<%= pagination.limit %>&search=<%= search || '' %>">
+                    <i class="fas fa-chevron-left"></i>
+                  </a>
+                </li>
+                <% for (let i = Math.max(1, pagination.page - 2); i <= Math.min(pagination.totalPages, pagination.page + 2); i++) { %>
+                  <li class="page-item <%= i === pagination.page ? 'active' : '' %>">
+                    <a class="page-link" href="?page=<%= i %>&limit=<%= pagination.limit %>&search=<%= search || '' %>">
+                      <%= i %>
+                    </a>
+                  </li>
+                <% } %>
+                <li class="page-item <%= pagination.page === pagination.totalPages ? 'disabled' : '' %>">
+                  <a class="page-link" href="?page=<%= pagination.page + 1 %>&limit=<%= pagination.limit %>&search=<%= search || '' %>">
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <div class="text-center text-light">
+              Hiển thị từ <%= ((pagination.page - 1) * pagination.limit) + 1 %> đến 
+              <%= Math.min(pagination.page * pagination.limit, pagination.total) %> 
+              trên tổng <%= pagination.total %> người dùng
+            </div>
+          <% } %>
+        <% } else { %>
+          <div class="text-center py-5">
+            <i class="fas fa-users fa-4x text-muted mb-3"></i>
+            <h4 class="text-light">Chưa có người dùng</h4>
+            <p class="text-light">
+              <% if (search) { %>
+                Không tìm thấy kết quả phù hợp.
+                <a href="/users" class="text-warning">Xóa bộ lọc</a>
+              <% } else { %>
+                Hãy bắt đầu bằng cách thêm người dùng đầu tiên.
+              <% } %>
+            </p>
+            <a href="/crud" class="btn btn-warning btn-custom">
+              <i class="fas fa-user-plus"></i> Thêm người dùng
+            </a>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="stats-card text-center">
+          <i class="fas fa-users fa-2x mb-2 text-warning"></i>
+          <h4><%= pagination.total %></h4>
+          <small>Tổng số người dùng</small>
+        </div>
+      </div>
+      <div class="col-md-4" id="male-stats"></div>
+      <div class="col-md-4" id="female-stats"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Gọi API thống kê
+    fetch('/api/users/stats')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('male-stats').innerHTML = `
+            <div class="stats-card text-center">
+              <i class="fas fa-mars fa-2x mb-2 text-info"></i>
+              <h4>${data.data.maleCount}</h4>
+              <small>Người dùng Nam</small>
+            </div>
+          `;
+          document.getElementById('female-stats').innerHTML = `
+            <div class="stats-card text-center">
+              <i class="fas fa-venus fa-2x mb-2 text-danger"></i>
+              <h4>${data.data.femaleCount}</h4>
+              <small>Người dùng Nữ</small>
+            </div>
+          `;
+        }
+      })
+      .catch(err => console.error(err));
+  </script>
+</body>
+</html>
